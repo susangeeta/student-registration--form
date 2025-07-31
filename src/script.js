@@ -13,14 +13,14 @@ function allStudent() {
   container.innerHTML = students
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .map((item, id) => {
-      return ` <div class="grid grid-cols-6 border-b border-b-gray-300 cursor-pointe w-full hover:bg-gray-300 transition-all ease-in-out duration-300 ">
-                     <div class="col-span-1 px-2  text-sm font-medium flex items-center gap-2">
+      return ` <div class="grid grid-cols-7 md:grid-cols-6 border-b border-b-gray-300 cursor-pointe w-full hover:bg-gray-300 transition-all ease-in-out duration-300 ">
+                     <div class=" col-span-2 md:col-span-1   text-sm font-medium flex items-center gap-2">
                     <div class= "bg-gray-400 rounded-full h-8 w-8 flex items-center justify-center">
                     <h1 class="text-base text-white  flex items-center justify-center">${item?.name
                       ?.charAt(0)
                       .toUpperCase()}</h1>
                     </div>
-                    <div class="col-span-1 text-sm pt-1  text-[#93909d] font-normal flex items-center justify-center capitalize">
+                    <div class="col-span-1 text-sm pt-1 whitespace-nowrap  text-[#93909d] font-normal flex items-center justify-center capitalize">
                         ${
                           item?.name?.charAt(0).toUpperCase() +
                           item?.name?.slice(1).toLowerCase()
@@ -44,12 +44,12 @@ function allStudent() {
                 </div>
              
                 <div class="col-span-1 p-4 text-sm flex gap-2 items-center justify-center ">
-                    <div id="edit-button" class="bg-blue-600 h-8 w-8 rounded-md flex items-center justify-center" onclick="renderEditDrawer(${
+                    <div id="edit-button" class="bg-blue-600 cursor-pointer h-8 w-8 rounded-md flex items-center justify-center" onclick="renderEditDrawer(${
                       item.id
                     })">
                         <img src="./assests/edit-icon.png" class="h-4 w-4" />
                     </div>
-                    <div class="bg-red-600 h-8 w-8 rounded-md flex items-center justify-center " onclick="deleteStudent(${
+                    <div class="bg-red-600 h-8 w-8 rounded-md flex items-center cursor-pointer justify-center " onclick="deleteStudent(${
                       item.id
                     })">
                         <img src="./assests/delete-icon.png" class="h-4 w-4" />
@@ -277,39 +277,39 @@ function renderHistoryDrawer() {
 
   container.innerHTML = `
   <form id="student-form" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium text-gray-700">Full Name</label>
+      <div class="flex flex-col gap-2">
+        <label class="block text-sm font-medium text-gray-700">Student Name</label>
         <input type="text" name="name" required
-          class="mt-1  w-full rounded-md border-gray-300 border  p-3 text-base" />
+          class="w-full rounded-md border-gray-300 border  p-3 text-base" />
       </div>
 
-      <div>
+      <div class="flex flex-col gap-2">
         <label class="block text-sm font-medium text-gray-700">Student ID</label>
         <input type="text" name="id" required
-          class="mt-1 block w-full rounded-md border-gray-300 border  p-3 text-base" />
+          class="w-full rounded-md border-gray-300 border  p-3 text-base" />
       </div>
 
-      <div>
+      <div class="flex flex-col gap-2">
         <label class="block text-sm font-medium text-gray-700">Roll No</label>
         <input type="text" name="roll" required
-          class="mt-1 block w-full rounded-md border-gray-300  border  p-3 text-base" />
+          class="w-full rounded-md border-gray-300  border  p-3 text-base" />
       </div>
-   <div>
+   <div class="flex flex-col gap-2">
         <label class="block text-sm font-medium text-gray-700">Class</label>
         <input type="text" name="class" required
-          class="mt-1 block w-full rounded-md border-gray-300 border  p-3 text-base" />
+          class="w-full rounded-md border-gray-300 border  p-3 text-base" />
       </div>
       <div>
-        <label class="block text-sm font-medium text-gray-700">Mobile</label>
+        <label class="block text-sm font-medium text-gray-700">Contact No</label>
         <input type="tel" name="mobile" required
-          class="mt-1 block w-full rounded-md border-gray-300 border  p-3 text-base" />
+          class="w-full rounded-md border-gray-300 border  p-3 text-base" />
       </div>
 
    
 
       <div class="pt-2">
         <button type="submit"
-          class="w-full bg-[#6a73fa] text-white py-2 px-4 rounded-md hover:bg-indigo-600 transition">
+          class="w-full bg-[#6a73fa] text-white py-2 px-4 cursor-pointer rounded-md hover:bg-indigo-600 transition">
           Save Student
         </button>
       </div>
@@ -343,49 +343,51 @@ function renderEditDrawer(id) {
   const container = document.getElementById("edit-drawer-history");
   container.innerHTML = `
   <form id="edit-student-form" class="space-y-4">
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Full Name</label>
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-medium text-gray-700">Student Name</label>
       <input value="${escapeHTML(
         selectedStudent?.name
       )}" type="text" name="name" required
-        class="mt-1 w-full rounded-md border-gray-300 border p-3 text-base" />
+        class=" w-full rounded-md border-gray-300 border p-3 text-base" />
     </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Roll No</label>
-      <input value="${escapeHTML(
-        selectedStudent?.roll
-      )}" type="text" name="roll" required
-        class="mt-1 block w-full rounded-md border-gray-300 border p-3 text-base" />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Mobile</label>
-      <input value="${escapeHTML(
-        selectedStudent?.mobile
-      )}" type="tel" name="mobile" required
-        class="mt-1 block w-full rounded-md border-gray-300 border p-3 text-base" />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Class</label>
-      <input value="${escapeHTML(
-        selectedStudent?.class
-      )}" type="text" name="class" required
-        class="mt-1 block w-full rounded-md border-gray-300 border p-3 text-base" />
-    </div>
-
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Student ID</label>
+     <div class="flex flex-col gap-2">
+      <label class="text-sm font-medium text-gray-700">Student ID</label>
       <input value="${escapeHTML(
         selectedStudent?.id
       )}" type="text" name="id" required readonly 
-        class="mt-1 block w-full rounded-md border-gray-300 border p-3 text-base" />
+        class="w-full rounded-md border-gray-300 border p-3 text-base" />
     </div>
+
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-medium text-gray-700">Roll No</label>
+      <input value="${escapeHTML(
+        selectedStudent?.roll
+      )}" type="text" name="roll" required
+        class=" w-full rounded-md border-gray-300 border p-3 text-base" />
+    </div>
+    
+    <div class="flex flex-col gap-2">
+      <label class=" text-sm font-medium text-gray-700">Class</label>
+      <input value="${escapeHTML(
+        selectedStudent?.class
+      )}" type="text" name="class" required
+        class="w-full rounded-md border-gray-300 border p-3 text-base" />
+    </div>
+
+
+    <div class="flex flex-col gap-2">
+      <label class="text-sm font-medium text-gray-700">Contact No</label>
+      <input value="${escapeHTML(
+        selectedStudent?.mobile
+      )}" type="tel" name="mobile" required
+        class="w-full rounded-md border-gray-300 border p-3 text-base" />
+    </div>
+
+   
 
     <div class="pt-2">
       <button type="submit readOnly"
-        class="w-full bg-[#6a73fa] text-white py-2 px-4 rounded-md hover:bg-indigo-600 transition">
+        class="w-full bg-[#6a73fa] text-white py-2 px-4 cursor-pointer rounded-md hover:bg-indigo-600 transition">
         Update Student
       </button>
     </div>
