@@ -4,16 +4,19 @@
   font-family: "DM Sans", sans-serif;
 }
 
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+#student-data {
+  /* scrollbar-width: thin; */
+  scrollbar-color: #6a73fa #f0f0f0;
+  scroll-behavior: smooth;
 }
-.animate-slideInRight {
-  animation: slideInRight 0.3s ease-out;
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  overflow-y: scroll;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
