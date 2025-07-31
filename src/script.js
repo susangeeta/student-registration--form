@@ -1,5 +1,4 @@
 //add drawer
-
 document.addEventListener("DOMContentLoaded", function () {
   renderHistoryDrawer();
   const addStudentBtn = document.getElementById("add-student");
@@ -27,21 +26,75 @@ document.addEventListener("DOMContentLoaded", function () {
       createdAt: new Date().toISOString(),
     };
     console.log(student);
-    if (
-      !student.name ||
-      !/^[A-Za-z\s]+$/.test(student.name) ||
-      !/^\d{10,}$/.test(student.mobile) ||
-      !/^[\w.-]+@[a-zA-Z_]+\.[a-zA-Z]{2,}$/.test(student.email) ||
-      !/^\d+$/.test(student.roll) ||
-      !/^\d+$/.test(student.id)
-    ) {
-      alert("Please enter valid details.");
+    if (!student.name) {
+      Swal.fire("Invalid Name", "Name is required.", "error");
+      return;
+    }
+    if (!/^[A-Za-z\s]+$/.test(student.name)) {
+      Swal.fire(
+        "Invalid Name",
+        "Name should contain only letters and spaces.",
+        "error"
+      );
+      return;
+    }
+    if (!student.mobile) {
+      Swal.fire("Invalid Mobile", "Mobile number is required.", "error");
+      return;
+    }
+    if (!/^\d{10}$/.test(student.mobile)) {
+      Swal.fire(
+        "Invalid Mobile",
+        "Mobile number must be exactly 10 digits.",
+        "error"
+      );
+      return;
+    }
+    if (!student.email) {
+      Swal.fire("Invalid Email", "Email is required.", "error");
+      return;
+    }
+    if (!/^[\w.-]+@[a-zA-Z_]+\.[a-zA-Z]{2,}$/.test(student.email)) {
+      Swal.fire(
+        "Invalid Email",
+        "Please enter a valid email address.",
+        "error"
+      );
+      return;
+    }
+    if (!student.roll) {
+      Swal.fire("Invalid Roll No", "Roll number is required.", "error");
+      return;
+    }
+    if (!/^\d+$/.test(student.roll)) {
+      Swal.fire("Invalid Roll No", "Roll number must be numeric.", "error");
+      return;
+    }
+    if (!student.id) {
+      Swal.fire("Invalid ID", "Student ID is required.", "error");
+      return;
+    }
+    if (!/^\d+$/.test(student.id)) {
+      Swal.fire("Invalid ID", "Student ID must be numeric.", "error");
       return;
     }
     const students = JSON.parse(localStorage.getItem("students") || "[]");
+    const isDuplicate = students.some((s) => s.id === student.id);
+    if (isDuplicate) {
+      Swal.fire("A student with this ID already exists.", "error");
+      return;
+    }
+    const isDuplicateEmail = students.some((s) => s.email === student.email);
+    if (isDuplicateEmail) {
+      Swal.fire(
+        "Duplicate Email",
+        "A student with this email already exists.",
+        "error"
+      );
+      return;
+    }
     students.push(student);
     localStorage.setItem("students", JSON.stringify(students));
-    console.log("Student added successfully:", student);
     e.target.reset();
     drawer.classList.add("translate-x-full");
     allStudent();
@@ -150,7 +203,7 @@ function allStudent() {
 allStudent();
 
 //edit drawer content
-function renderEditHistoryDrawer() {
+function renderEditDrawer() {
   const container = document.getElementById("edit-drawer-history");
   container.innerHTML = `
   <form id="edit-student-form" class="space-y-4">
@@ -199,7 +252,7 @@ function renderEditHistoryDrawer() {
 
 //edit drawer
 document.addEventListener("DOMContentLoaded", function () {
-  renderEditHistoryDrawer();
+  renderEditDrawer();
   const editStudentBtn = document.getElementById("edit-button");
   const drawer = document.getElementById("edit-drawer");
   const closeDrawerBtn = document.getElementById("close-edit-drawer");
