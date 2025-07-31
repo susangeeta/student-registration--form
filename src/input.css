@@ -5,18 +5,6 @@
 }
 
 #student-data {
-  /* scrollbar-width: thin; */
-  scrollbar-color: #6a73fa #f0f0f0;
+  scrollbar-color: #a0a0a0, #f0f0f0;
   scroll-behavior: smooth;
-}
-
-.hide-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  overflow-y: scroll;
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-  display: none;
 }

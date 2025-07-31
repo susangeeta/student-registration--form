@@ -13,8 +13,8 @@ function allStudent() {
   container.innerHTML = students
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .map((item, id) => {
-      return ` <div class="grid grid-cols-7 md:grid-cols-6 border-b border-b-gray-300 cursor-pointe w-full hover:bg-gray-300 transition-all ease-in-out duration-300 ">
-                     <div class=" col-span-2 md:col-span-1   text-sm font-medium flex items-center gap-2">
+      return ` <div class="grid grid-cols-7 lg:grid-cols-6 border-b border-b-gray-300 cursor-pointe w-full hover:bg-gray-300 transition-all ease-in-out duration-300 ">
+                     <div class=" col-span-2 lg:col-span-1   text-sm font-medium flex items-center gap-2">
                     <div class= "bg-gray-400 rounded-full h-8 w-8 flex items-center justify-center">
                     <h1 class="text-base text-white  flex items-center justify-center">${item?.name
                       ?.charAt(0)
